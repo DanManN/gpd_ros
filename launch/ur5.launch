@@ -14,8 +14,8 @@
     <param name="samples_topic" value="" />
 
     <!-- Filepath to the configuration file for GPD -->
-    <!-- <param name="config_file" value="/home/ur5/projects/gpd/cfg/ros_eigen_params.cfg" /> -->
-    <param name="config_file" value="/home/ur5/projects/gpd/cfg/ros_vino_params.cfg" />
+    <!-- <param name="config_file" value="/home/user/Projects/pracsys_ws/src/gpd_ros/cfg/ros_eigen_params.cfg" /> -->
+    <param name="config_file" value="/home/user/Projects/pracsys_ws/src/gpd_ros/cfg/ros_vino_params.cfg" />
 
     <param name="rviz_topic" value="plot_grasps" />
 
