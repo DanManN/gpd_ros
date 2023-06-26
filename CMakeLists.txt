@@ -16,7 +16,7 @@ add_definitions(${PCL_DEFINITIONS})
 find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
-find_library(GPD_LIB NAMES gpd PATHS /usr/local/lib PATH_SUFFIXES lib NO_DEFAULT_PATH)
+find_library(GPD_LIB NAMES gpd PATHS ~/micromamba/envs/ros_env/usr/local/lib PATH_SUFFIXES lib NO_DEFAULT_PATH)
 if (GPD_LIB)
   message(STATUS "Library GPD found in ${GPD_LIB}")
 else()

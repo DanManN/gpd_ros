@@ -1,4 +1,5 @@
-
+#!/usr/bin/env bash
+echo "
 # Path to config file for robot hand geometry
 hand_geometry_filename = 0
 
@@ -12,7 +13,7 @@ image_geometry_filename = 0
 #   hand_height: the height of the hand
 #   init_bite: the minimum amount of the object to be covered by the hand
 finger_width = 0.01
-hand_outer_diameter = 0.10
+hand_outer_diameter = 0.12
 hand_depth = 0.06
 hand_height = 0.02
 init_bite = 0.01
@@ -27,12 +28,10 @@ volume_width = 0.10
 volume_depth = 0.06
 volume_height = 0.02
 image_size = 60
-image_num_channels = 12
+image_num_channels = 15
 
 # (OpenVINO) Path to directory that contains neural network parameters
-model_file = /data/sauce/robotics/ros/pracsys_ws/src/gpd_ros/../models/openvino/two_views_12_channels_curv_axis.xml
-weights_file = /data/sauce/robotics/ros/pracsys_ws/src/gpd_ros/../models/openvino/two_views_12_channels_curv_axis.bin
-device = 0
+weights_file = $(pwd)/../models/lenet/15channels/params/
 
 # Preprocessing of point cloud
 #   voxelize: if the cloud gets voxelized/downsampled
@@ -53,7 +52,7 @@ sample_above_plane = 0
 #   num_orientations: the number of robot hand orientations to evaluate
 #   rotation_axes: the axes about which the point neighborhood gets rotated
 num_samples = 500
-num_threads = 6
+num_threads = 4
 nn_radius = 0.01
 num_orientations = 8
 num_finger_placements = 10
@@ -66,7 +65,7 @@ deepen_hand = 1
 #   workspace_grasps: dimensions of a cube centered at origin of point cloud; should be smaller than <workspace>
 min_aperture = 0.0
 max_aperture = 0.85
-workspace_grasps = -1.0 1.0 -1.0 1.0 -1.0 1.0
+workspace_grasps = -1 1 -1 1 -1 1
 
 # Filtering of candidates based on their approach direction
 #   filter_approach_direction: turn filtering on/off
@@ -98,5 +97,5 @@ plot_candidates = 0
 plot_filtered_candidates = 0
 plot_valid_grasps = 0
 plot_clustered_grasps = 0
-plot_selected_grasps = 0
-
+plot_selected_grasps = 1
+"
