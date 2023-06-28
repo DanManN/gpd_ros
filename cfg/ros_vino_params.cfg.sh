@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# run from root directory of gpd_ros (one level up from this file)
 echo "
 # Path to config file for robot hand geometry
 hand_geometry_filename = 0
@@ -31,8 +32,8 @@ image_size = 60
 image_num_channels = 12
 
 # (OpenVINO) Path to directory that contains neural network parameters
-model_file = $(pwd)/../models/openvino/two_views_12_channels_curv_axis.xml
-weights_file = $(pwd)/../models/openvino/two_views_12_channels_curv_axis.bin
+model_file = $(pwd)/models/openvino/two_views_12_channels_curv_axis.xml
+weights_file = $(pwd)/models/openvino/two_views_12_channels_curv_axis.bin
 device = 0
 
 # Preprocessing of point cloud

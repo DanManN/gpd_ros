@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# run from root directory of gpd_ros (one level up from this file)
 echo "
 # Path to config file for robot hand geometry
 hand_geometry_filename = 0
@@ -31,7 +32,7 @@ image_size = 60
 image_num_channels = 15
 
 # (OpenVINO) Path to directory that contains neural network parameters
-weights_file = $(pwd)/../models/lenet/15channels/params/
+weights_file = $(pwd)/models/lenet/15channels/params/
 
 # Preprocessing of point cloud
 #   voxelize: if the cloud gets voxelized/downsampled

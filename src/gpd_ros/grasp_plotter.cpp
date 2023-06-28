@@ -4,7 +4,7 @@
 GraspPlotter::GraspPlotter(ros::NodeHandle& node, const gpd::candidate::HandGeometry& params)
 {
   std::string rviz_topic;
-  node.param("rviz_topic", rviz_topic, std::string(""));
+  node.param("rviz_topic", rviz_topic, std::string("plot_grasps"));
   rviz_pub_ = node.advertise<visualization_msgs::MarkerArray>(rviz_topic, 1);
 
   hand_depth_ = params.depth_;
