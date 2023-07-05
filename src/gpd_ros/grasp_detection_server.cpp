@@ -7,7 +7,7 @@ GraspDetectionServer::GraspDetectionServer(ros::NodeHandle& node)
 
   // set camera viewpoint to default origin
   std::vector<double> camera_position;
-  node.getParam("camera_position", camera_position, std::vector<double> {0.0, 0.0, 0.0});
+  node.param("camera_position", camera_position, std::vector<double> {0.0, 0.0, 0.0});
   view_point_ << camera_position[0], camera_position[1], camera_position[2];
 
   std::string cfg_file;
