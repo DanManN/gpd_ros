@@ -40,7 +40,8 @@ bool GraspDetectionServer::detectGrasps(gpd_ros::detect_grasps::Request& req, gp
 
   // 1. Initialize cloud camera.
   cloud_camera_ = NULL;
-  const gpd_ros::CloudSources& cloud_sources = req.cloud_indexed.cloud_sources;
+  /* const gpd_ros::CloudSources& cloud_sources = req.cloud_indexed.cloud_sources; */
+  const gpd_ros::CloudSources& cloud_sources = req.cloud_samples.cloud_sources;
 
   // Set view points.
   Eigen::Matrix3Xd view_points(3, cloud_sources.view_points.size());
@@ -83,17 +84,30 @@ bool GraspDetectionServer::detectGrasps(gpd_ros::detect_grasps::Request& req, gp
   }
 
   // Set the indices at which to sample grasp candidates.
-  std::vector<int> indices(req.cloud_indexed.indices.size());
-  for (int i=0; i < indices.size(); i++)
-  {
-    indices[i] = req.cloud_indexed.indices[i].data;
-  }
-  cloud_camera_->setSampleIndices(indices);
+  /* std::vector<int> indices(req.cloud_indexed.indices.size()); */
+  /* for (int i=0; i < indices.size(); i++) */
+  /* { */
+  /*   indices[i] = req.cloud_indexed.indices[i].data; */
+  /* } */
+  /* cloud_camera_->setSampleIndices(indices); */
 
-  frame_ = req.cloud_indexed.cloud_sources.cloud.header.frame_id;
+  /* frame_ = req.cloud_indexed.cloud_sources.cloud.header.frame_id; */
+
+  /* ROS_INFO_STREAM("Received cloud with " << cloud_camera_->getCloudProcessed()->size() << " points, and " */
+  /*   << req.cloud_indexed.indices.size() << " samples"); */
+  // Set the samples at which to sample grasp candidates.
+
+  Eigen::Matrix3Xd samples(3, req.cloud_samples.samples.size());
+  for (int i=0; i < req.cloud_samples.samples.size(); i++)
+  {
+  samples.col(i) << req.cloud_samples.samples[i].x, req.cloud_samples.samples[i].y, req.cloud_samples.samples[i].z;
+  }
+  cloud_camera_->setSamples(samples);
+
+  frame_ = req.cloud_samples.cloud_sources.cloud.header.frame_id;
 
   ROS_INFO_STREAM("Received cloud with " << cloud_camera_->getCloudProcessed()->size() << " points, and "
-    << req.cloud_indexed.indices.size() << " samples");
+  << cloud_camera_->getSamples().cols() << " samples");
 
   // 2. Preprocess the point cloud.
   grasp_detector_->preprocessPointCloud(*cloud_camera_);
