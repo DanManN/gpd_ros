@@ -1,7 +1,7 @@
 <launch>
   <arg name="cloud_type" default="2" /> <!-- 0: PointCloud2, 1: CloudIndexed, 2: CloudSamples -->
-  <arg name="cloud_topic" default="/cloud_stitched" />
-  <node name="detect_grasps" pkg="gpd_ros" type="detect_grasps" output="screen">
+  <arg name="cloud_topic" default="/point_cloud/samples" />
+  <node name="detect_grasps_node" pkg="gpd_ros" type="detect_grasps" output="screen">
 
     <!-- If sequential importance sampling is used (default: false) -->
 <!--
