@@ -12,11 +12,11 @@ image_geometry_filename = 0
 #   hand_depth: the finger length (measured from hand base to finger tip)
 #   hand_height: the height of the hand
 #   init_bite: the minimum amount of the object to be covered by the hand
-finger_width = 0.01
-hand_outer_diameter = 0.12
-hand_depth = 0.06
-hand_height = 0.02
-init_bite = 0.01
+finger_width = 0.0065
+hand_outer_diameter = 0.098
+hand_depth = 0.0613
+hand_height = 0.035
+init_bite = 0.02
 
 # ==== Grasp Descriptor ====
 #   volume_width: the width of the cube inside the robot hand
@@ -97,5 +97,5 @@ plot_candidates = 0
 plot_filtered_candidates = 0
 plot_valid_grasps = 0
 plot_clustered_grasps = 0
-plot_selected_grasps = 1
+plot_selected_grasps = 0
 "
