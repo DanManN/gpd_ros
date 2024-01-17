@@ -1,0 +1,5 @@
+geometry_msgs/Point[] points
+sensor_msgs/PointCloud2 cloud
+geometry_msgs/Point[] camera_position
+---
+gpd_ros/Grasps grasps

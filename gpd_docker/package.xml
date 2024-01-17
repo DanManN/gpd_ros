@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>gpd_docker</name>
+  <version>1.0.0</version>
+  <description>Grasp pose detector ROS service in a docker container.</description>
+  <maintainer email="d.nak@rutgers.edu">Daniel Nakhimovich</maintainer>
+  <license>BSD</license>
+  <author>Daniel Nakhimovich</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>python3-catkin-pkg-modules</buildtool_depend>.
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+</package>
