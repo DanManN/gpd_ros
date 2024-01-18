@@ -1,4 +1,4 @@
 <launch>
   <arg name="config" default="$(find pracsys_vbnpm)/scripts/grasp_planner/gpd_ros_eigen_params.cfg"/>
-  <node name="gpd_ros_server" pkg="gpd_ros" type="run_container.py" output="screen" args="-host $(optenv ROS_MASTER localhost) -c $(arg config)" />
+  <node name="gpd_ros_server" pkg="gpd_docker" type="run_container.py" output="screen" args="-host $(optenv ROS_MASTER localhost) -c $(arg config)" />
 </launch>

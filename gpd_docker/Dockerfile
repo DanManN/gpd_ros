@@ -47,13 +47,12 @@ SHELL ["/bin/bash", "-c"]
 ########################################
 # Installing catkin package
 RUN mkdir -p ~/gpd_ws/src
-RUN cd ~/gpd_ws/src && \
-    git clone https://github.com/DanManN/gpd_ros.git && \
-    rm -rf gpd_ros/gpd_docker gpd_ros/gpd_ros/CATKIN_IGNORE
-
+RUN cd ~/gpd_ws/src && git clone https://github.com/DanManN/gpd_ros.git
+RUN cd ~/gpd_ws/src/gpd_ros/ && rm -rf gpd_docker gpd_ros/CATKIN_IGNORE
+RUN pip install transformations
 COPY --chown=user . /home/user/gpd_ws/src/gpd_ros/gpd_docker
 RUN source /opt/ros/noetic/setup.bash && \
-    cd ~/gpd_ws && catkin_make
+    cd ~/gpd_ws && catkin_make -j1
 
 ########################################
 ########### ENV VARIABLE STUFF #########

@@ -7,8 +7,8 @@ import transformations as tf
 from std_msgs.msg import Int64
 from geometry_msgs.msg import Pose, PoseStamped
 
-from gpg_ros.msg import Grasps
-from gpg_ros.srv import GetGrasps, GetGraspsResponse
+from gpd_docker.msg import Grasps
+from gpd_docker.srv import GetGrasps, GetGraspsResponse
 from gpd_ros.msg import CloudSamples
 from gpd_ros.srv import detect_grasps, detect_graspsRequest, detect_graspsResponse
 
@@ -65,7 +65,7 @@ class GraspPlanner():
             resp = service(msg)
         except rospy.ServiceException as e:
             print('Service call failed:', e)
-            sys.exit(1)
+            return [], []
 
         pose_list = []
         score_list = []
@@ -89,7 +89,7 @@ class GraspPlanner():
             )
 
             pose_list.append(matrix_to_pose(pose))
-            score_list.append(grasp.score)
+            score_list.append(grasp.score.data)
         return pose_list, score_list
 
     def handle_grasp_request(self, req):
