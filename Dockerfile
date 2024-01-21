@@ -36,6 +36,10 @@ RUN git clone https://github.com/atenpas/gpd.git && \
     make -j && \
     make install
 
+RUN pip install transformations
+
+RUN apt update && apt install -y gdb
+
 WORKDIR /home/user
 
 USER user
@@ -47,12 +51,10 @@ SHELL ["/bin/bash", "-c"]
 ########################################
 # Installing catkin package
 RUN mkdir -p ~/gpd_ws/src
-RUN cd ~/gpd_ws/src && git clone https://github.com/DanManN/gpd_ros.git
-RUN cd ~/gpd_ws/src/gpd_ros/ && rm -rf gpd_docker gpd_ros/CATKIN_IGNORE
-RUN pip install transformations
-COPY --chown=user . /home/user/gpd_ws/src/gpd_ros/gpd_docker
+COPY --chown=user . /home/user/gpd_ws/src/gpd_ros
+RUN ls -al ~/gpd_ws/src/gpd_ros && rm ~/gpd_ws/src/gpd_ros/gpd_ros/CATKIN_IGNORE
 RUN source /opt/ros/noetic/setup.bash && \
-    cd ~/gpd_ws && catkin_make -j1
+    cd ~/gpd_ws && catkin_make -j2 -DCMAKE_BUILD_TYPE=Debug
 
 ########################################
 ########### ENV VARIABLE STUFF #########

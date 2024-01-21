@@ -97,6 +97,9 @@ bool GraspDetectionServer::detectGrasps(gpd_ros::detect_grasps::Request& req, gp
   /*   << req.cloud_indexed.indices.size() << " samples"); */
   // Set the samples at which to sample grasp candidates.
 
+  ROS_INFO_STREAM("Received cloud with " << cloud_camera_->getCloudProcessed()->size() << " points, and "
+    << req.cloud_samples.samples.size() << " samples");
+
   Eigen::Matrix3Xd samples(3, req.cloud_samples.samples.size());
   for (int i=0; i < req.cloud_samples.samples.size(); i++)
   {
@@ -127,12 +130,10 @@ bool GraspDetectionServer::detectGrasps(gpd_ros::detect_grasps::Request& req, gp
     gpd_ros::GraspConfigList selected_grasps_msg = GraspMessages::createGraspListMsg(grasps, cloud_camera_header_);
     res.grasp_configs = selected_grasps_msg;
     ROS_INFO_STREAM("Detected " << selected_grasps_msg.grasps.size() << " highest-scoring grasps.");
-    delete cloud_camera_;
     return true;
   }
 
   ROS_WARN("No grasps detected!");
-  delete cloud_camera_;
   return false;
 }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import copy
 import numpy as np
 
 import rospy
@@ -54,7 +54,7 @@ class GraspPlanner():
         camera_source = [Int64(0) for x in range(cloud.height * cloud.width)]
         msg.cloud_sources.camera_source = camera_source
         msg.cloud_sources.view_points = [camera_position]
-        msg.samples = points
+        msg.samples = copy.deepcopy(points)
 
         rospy.wait_for_service('/detect_grasps_server/detect_grasps', timeout=5)
         try:

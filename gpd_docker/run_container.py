@@ -26,7 +26,8 @@ if __name__ == "__main__":
 
     docker_run_command = """
         docker run \
-            --rm --net=host -it \
+            --rm --net=host -it --gpus all \
+            -e DISPLAY=$DISPLAY -v /tmp:/tmp \
             -v {config_path}:/mnt \
             gpd_ros:latest \
             /bin/bash -i -c \
