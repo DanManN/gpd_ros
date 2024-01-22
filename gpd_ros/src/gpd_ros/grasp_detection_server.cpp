@@ -83,11 +83,16 @@ bool GraspDetectionServer::detectGrasps(gpd_ros::detect_grasps::Request& req, gp
     std::cout << "view_points:\n" << view_points << "\n";
   }
 
+
+  const auto samples_v = req.cloud_samples.samples;
+
   // Set the indices at which to sample grasp candidates.
   /* std::vector<int> indices(req.cloud_indexed.indices.size()); */
+  /* std::vector<int> indices(req.cloud_samples.samples.size()); */
   /* for (int i=0; i < indices.size(); i++) */
   /* { */
-  /*   indices[i] = req.cloud_indexed.indices[i].data; */
+  /*   /1* indices[i] = req.cloud_indexed.indices[i].data; *1/ */
+  /*   indices[i] = i; */
   /* } */
   /* cloud_camera_->setSampleIndices(indices); */
 
@@ -98,16 +103,18 @@ bool GraspDetectionServer::detectGrasps(gpd_ros::detect_grasps::Request& req, gp
   // Set the samples at which to sample grasp candidates.
 
   ROS_INFO_STREAM("Received cloud with " << cloud_camera_->getCloudProcessed()->size() << " points, and "
-    << req.cloud_samples.samples.size() << " samples");
+    << samples_v.size() << " samples");
 
-  Eigen::Matrix3Xd samples(3, req.cloud_samples.samples.size());
-  for (int i=0; i < req.cloud_samples.samples.size(); i++)
+  Eigen::Matrix3Xd samples(3, samples_v.size());
+  for (int i=0; i < samples_v.size(); i++)
   {
-  samples.col(i) << req.cloud_samples.samples[i].x, req.cloud_samples.samples[i].y, req.cloud_samples.samples[i].z;
+    samples.col(i) << samples_v[i].x, samples_v[i].y, samples_v[i].z;
   }
+
+  ROS_INFO_STREAM("Samples: " << samples);
   cloud_camera_->setSamples(samples);
 
-  frame_ = req.cloud_samples.cloud_sources.cloud.header.frame_id;
+  frame_ = cloud_sources.cloud.header.frame_id;
 
   ROS_INFO_STREAM("Received cloud with " << cloud_camera_->getCloudProcessed()->size() << " points, and "
   << cloud_camera_->getSamples().cols() << " samples");

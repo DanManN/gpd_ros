@@ -29,6 +29,7 @@ if __name__ == "__main__":
             --rm --net=host -it --gpus all \
             -e DISPLAY=$DISPLAY -v /tmp:/tmp \
             -v {config_path}:/mnt \
+            --security-opt seccomp=unconfined \
             gpd_ros:latest \
             /bin/bash -i -c \
             "source ~/.bashrc; \

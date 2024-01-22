@@ -30,6 +30,7 @@ RUN apt update && apt install -y --no-install-recommends \
 
 RUN git clone https://github.com/atenpas/gpd.git && \
     cd gpd && \
+    sed -i 's/samples_ = samples/samples_ = Eigen::Matrix3Xd(samples)/' src/gpd/util/cloud.cpp && \
     mkdir build && \
     cd build && \
     cmake .. && \
@@ -54,7 +55,7 @@ RUN mkdir -p ~/gpd_ws/src
 COPY --chown=user . /home/user/gpd_ws/src/gpd_ros
 RUN ls -al ~/gpd_ws/src/gpd_ros && rm ~/gpd_ws/src/gpd_ros/gpd_ros/CATKIN_IGNORE
 RUN source /opt/ros/noetic/setup.bash && \
-    cd ~/gpd_ws && catkin_make -j2 -DCMAKE_BUILD_TYPE=Debug
+    cd ~/gpd_ws && catkin_make -j4 -DCMAKE_BUILD_TYPE=Debug
 
 ########################################
 ########### ENV VARIABLE STUFF #########
