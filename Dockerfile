@@ -39,8 +39,6 @@ RUN git clone https://github.com/atenpas/gpd.git && \
 
 RUN pip install transformations
 
-RUN apt update && apt install -y gdb
-
 WORKDIR /home/user
 
 USER user
