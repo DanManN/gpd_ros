@@ -13,8 +13,8 @@ RUN echo 'user:user' | chpasswd
 
 # setup environment
 ENV DEBIAN_FRONTEND=noninteractive
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 RUN apt update && apt upgrade curl wget git -y
 
 # add kitware repo to get latest cmake
