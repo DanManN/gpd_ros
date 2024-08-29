@@ -39,10 +39,11 @@ RUN git clone https://github.com/atenpas/gpd.git && \
 
 RUN pip install transformations
 
+RUN mkdir -p /mnt/conf1 /mnt/conf2
+
 WORKDIR /home/user
 
 USER user
-CMD /bin/bash
 SHELL ["/bin/bash", "-c"]
 
 ########################################
