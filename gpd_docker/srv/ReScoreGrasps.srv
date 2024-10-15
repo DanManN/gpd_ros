@@ -1,0 +1,8 @@
+geometry_msgs/Point[] points
+sensor_msgs/PointCloud2 cloud
+geometry_msgs/Point camera_position
+# geometry_msgs/Pose[] grasps
+# geometry_msgs/Point[] samples
+gpd_ros/GraspConfig[] grasps
+---
+gpd_docker/Grasps grasps

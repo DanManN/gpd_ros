@@ -33,7 +33,6 @@
 #ifndef GRASP_DETECTION_SERVER_H_
 #define GRASP_DETECTION_SERVER_H_
 
-
 // ROS
 #include <eigen_conversions/eigen_msg.h>
 #include <pcl_conversions/pcl_conversions.h>
@@ -47,6 +46,7 @@
 
 // this project (services)
 #include <gpd_ros/detect_grasps.h>
+#include <gpd_ros/score_grasps.h>
 
 // this project (messages)
 #include <gpd_ros/GraspConfig.h>
@@ -85,6 +85,8 @@ public:
    * \param res the service response
    */
   bool detectGrasps(gpd_ros::detect_grasps::Request& req, gpd_ros::detect_grasps::Response& res);
+
+  bool scoreGrasps(gpd_ros::score_grasps::Request& req, gpd_ros::score_grasps::Response& res);
 
 
 private:

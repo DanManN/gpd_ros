@@ -1,29 +1,36 @@
 <launch>
   <arg name="config1" />
   <arg name="config2" />
-  <node name="detect_grasps_server1" pkg="gpd_ros" type="detect_grasps_server" output="screen" >
+  <node name="detect_grasps_server1" pkg="gpd_ros" type="detect_grasps_server" output="screen" launch-prefix="gdb -ex run --args">
     <param name="config_file" value="$(arg config1)" />
     <param name="rviz_topic" value="/gpd_large/plot_grasps" />
     <remap from="/detect_grasps_server1/detect_grasps" to="/gpd_large/detect_grasps_server/detect_grasps" />
+    <remap from="/detect_grasps_server1/score_grasps" to="/gpd_large/detect_grasps_server/score_grasps" />
     <remap from="/detect_grasps_server1/clustered_grasps" to="/gpd_large/detect_grasps_server/clustered_grasps" />
     <remap from="/get_grasps" to="/gpd_large/get_grasps" />
+    <!-- <remap from="/rescore_grasps" to="/rescore_grasps" /> -->
   </node>
   <node name="gpd_docker1" pkg="gpd_docker" type="grasp_server.py" output="screen" >
     <remap from="/detect_grasps_server/detect_grasps" to="/gpd_large/detect_grasps_server/detect_grasps" />
+    <remap from="/detect_grasps_server/score_grasps" to="/gpd_large/detect_grasps_server/score_grasps" />
     <remap from="/detect_grasps_server/clustered_grasps" to="/gpd_large/detect_grasps_server/clustered_grasps" />
     <remap from="/get_grasps" to="/gpd_large/get_grasps" />
+    <!-- <remap from="/rescore_grasps" to="/rescore_grasps" /> -->
   </node>
   <node name="detect_grasps_server2" pkg="gpd_ros" type="detect_grasps_server" output="screen" >
     <param name="config_file" value="$(arg config2)" />
     <param name="rviz_topic" value="/gpd_small/plot_grasps" />
     <remap from="/detect_grasps_server2/detect_grasps" to="/gpd_small/detect_grasps_server/detect_grasps" />
+    <remap from="/detect_grasps_server2/score_grasps" to="/gpd_small/detect_grasps_server/score_grasps" />
     <remap from="/detect_grasps_server2/clustered_grasps" to="/gpd_small/detect_grasps_server/clustered_grasps" />
     <remap from="/get_grasps" to="/gpd_small/get_grasps" />
+    <!-- <remap from="/rescore_grasps" to="/gpd_small/rescore_grasps" /> -->
   </node>
   <node name="gpd_docker2" pkg="gpd_docker" type="grasp_server.py" output="screen" >
     <remap from="/detect_grasps_server/detect_grasps" to="/gpd_small/detect_grasps_server/detect_grasps" />
+    <remap from="/detect_grasps_server/score_grasps" to="/gpd_small/detect_grasps_server/score_grasps" />
     <remap from="/detect_grasps_server/clustered_grasps" to="/gpd_small/detect_grasps_server/clustered_grasps" />
     <remap from="/get_grasps" to="/gpd_small/get_grasps" />
+    <!-- <remap from="/rescore_grasps" to="/gpd_small/rescore_grasps" /> -->
   </node>
 </launch>
-
