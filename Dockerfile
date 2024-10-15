@@ -41,7 +41,7 @@ RUN cd gpd && \
     # sed -i 's/ private:/  std::vector<float> classify_images(std::vector<std::unique_ptr<cv::Mat>> \&images) {return  classifier_->classifyImages(images);}\n  std::unique_ptr<descriptor::ImageGenerator> image_generator_;\n private:/' include/gpd/grasp_detector.h && \
     mkdir build && \
     cd build && \
-    cmake .. && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release && \
     make -j && \
     make install
 
@@ -63,7 +63,7 @@ RUN ls -al ~/gpd_ws/src/gpd_ros && \
     rm ~/gpd_ws/src/gpd_ros/gpd_ros_full/CATKIN_IGNORE && \
     mv ~/gpd_ws/src/gpd_ros/gpd_ros_full ~/gpd_ws/src/gpd_ros/gpd_ros
 RUN source /opt/ros/noetic/setup.bash && \
-    cd ~/gpd_ws && catkin_make -j4 -DCMAKE_BUILD_TYPE=Debug
+    cd ~/gpd_ws && catkin_make -j4 -DCMAKE_BUILD_TYPE=Release
 
 ########################################
 ########### ENV VARIABLE STUFF #########
